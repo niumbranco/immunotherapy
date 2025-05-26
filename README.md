@@ -9,7 +9,7 @@ This repository contains all scripts and ressources related to the analysis of t
 From the ENA metadata, I selecting only the **16S rRNA** samples based on the "tax_id=9606" and confirmed the sequencing method 
 
 ### 2. Downloading the FASTQ files 
-Using a script ('downlaod_fastq.sh'), I downloaded all paired-end FASTQ files related to 16S sequencing from the ENA FTP links
+Using a script ("downlaod_fastq.sh"), I downloaded all paired-end FASTQ files related to 16S sequencing from the ENA FTP links
 
 ### 3. Files integrity check 
 To make sure files were correctly downloaded: 
