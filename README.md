@@ -6,7 +6,7 @@ This repository contains all scripts and ressources related to the analysis of t
 ## Workflow: 
 
 ### 1. Data selection
-From the ENA metadata, I selecting only the **16S rRNA** samples based on the "tax_id=9606" and confirmed the sequencing method 
+From the ENA metadata, I selected only the **16S rRNA** samples based on the "tax_id=9606" and confirmed the sequencing method 
 
 ### 2. Downloading the FASTQ files 
 Using a script ("downlaod_fastq.sh"), I downloaded all paired-end FASTQ files related to 16S sequencing from the ENA FTP links
@@ -18,7 +18,7 @@ To make sure files were correctly downloaded:
 - A log of passed and failed checks was created
   
 ### 4. Quality control with fastp 
-I ran fastp on all paired-end FASTQ files unsing default settings 
+I ran fastp on all paired-end FASTQ files using default settings 
 It cleaned low-quality reads and generated reports. 
 
 
