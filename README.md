@@ -24,20 +24,20 @@ It cleaned low-quality reads and generated reports.
 
 ## File structure: 
 
-## scripts:
+### scripts:
 * download_fastq.sh    #download FATSQ files from ENA
 * verify_md5.sh        #check the md5 integrity of downloaded files
 * run_fastp.sh         #quality filtering with fastp
 
-## metadata: 
+### metadata: 
 * filereport_16S.txt   #cleaned metadata with 16S samples
 * fastq_links_16S.txt  #list of FASTQ URLs to download
 
-## logs: 
+### logs: 
 * md5_check_ok.txt     #files that passed the md5 check
 * md5_check_fail.txt   #files that failed or were missing
 * log_download.txt     #output log of the download script
 
-## fastp      
+### fastp      
 * fastp_output        #cleaned FASTQ files
 * fastp_reports       #HTML/JSON quality reports 
