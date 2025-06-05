@@ -1,0 +1,8 @@
+*.fastq.gz
+*.RData
+*.Rhistory
+*.Rapp.history
+.DS_Store
+fastp_output/
+fastp_reports/
+Notes/
