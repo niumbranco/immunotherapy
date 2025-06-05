@@ -50,10 +50,7 @@ A detailed visual report explaining this is available: "metadata/fastp_summary_r
 * md5_check_fail.txt   #files that failed or were missing
 * log_download.txt     #output log of the download script
 
-### fastp      
-* fastp_output        #cleaned FASTQ files
-* fastp_reports       #HTML/JSON quality reports
-
+### others
 * fastp_summary_report.pdf #visual explaination of filtering decisions 
 
 
