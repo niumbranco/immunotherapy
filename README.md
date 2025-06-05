@@ -27,6 +27,7 @@ It extracts important metrics (number of reads before and after filtering, Q20 a
 **Key observations:**
 * Q20 and Q30 scores remain high for all samples
 * The main filtering criterion was he number of reads after filtering.
+
 So finally, only samples with less than 30,000 reads after filtering were excluded from downstream analysis.
 A detailed visual report explaining this is available: "metadata/fastp_summary_report.pdf" 
 
@@ -36,10 +37,13 @@ A detailed visual report explaining this is available: "metadata/fastp_summary_r
 * download_fastq.sh    #download FATSQ files from ENA
 * verify_md5.sh        #check the md5 integrity of downloaded files
 * run_fastp.sh         #quality filtering with fastp
+* fastp_summary.r      #generate plots and summary from fastp JSON reports 
 
 ### metadata: 
 * filereport_16S.txt   #cleaned metadata with 16S samples
 * fastq_links_16S.txt  #list of FASTQ URLs to download
+* filereport_16S_filtered.tsv  #metadata filtered to keep only good quality samples
+* fastp_summary_table.csv   #CSV table with reads and quality scores
 
 ### logs: 
 * md5_check_ok.txt     #files that passed the md5 check
@@ -49,5 +53,7 @@ A detailed visual report explaining this is available: "metadata/fastp_summary_r
 ### fastp      
 * fastp_output        #cleaned FASTQ files
 * fastp_reports       #HTML/JSON quality reports
+
+* fastp_summary_report.pdf #visual explaination of filtering decisions 
 
 
