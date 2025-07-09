@@ -176,3 +176,9 @@ ggplot(summary_df, aes(x=final_status, fill=final_status)) +
   cat("List of samples that are low quality based on the number of reads only:\n")
   summary_df[summary_df$reads_after < 30000, c("sample_id", "reads_after")]
 })
+
+#print the sample which has the highest number of reads 
+({
+  cat("Sample which has the highest number of reads:\n")
+  summary_df[which.max(summary_df$reads_after), c("sample_id", "reads_after")]
+})
