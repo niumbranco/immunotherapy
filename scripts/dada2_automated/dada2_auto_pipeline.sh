@@ -11,3 +11,9 @@ mkdir -p "$results_dir"
 
 # Run filtering step
 Rscript filt.R -i "$read_trim_dir" -o "$results_dir"
+
+# Run error learning 
+Rscript err.R -i "$results_dir" -o "$results_dir" 
+
+# Run denoising step (ASV inference)
+Rscript infer_ASV.R -i "$results_dir" -o "$results_dir"
