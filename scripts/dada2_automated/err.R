@@ -33,16 +33,16 @@ if (!file.exists(errF_path) || !file.exists(errR_path)) {
   saveRDS(errF, errF_path)
   saveRDS(errR, errR_path)
 } else {
-  cat("Loading existing error models...\n")
+  cat("Loading existing error models\n")
   errF <- readRDS(errF_path)
   errR <- readRDS(errR_path)
 }
 
 # Plot and save error plots
-pdf(file.path(opt$output_dir, "errF_plot.pdf"))
-plotErrors(errF, nominalQ=TRUE)
-dev.off()
+# pdf(file.path(opt$output_dir, "errF_plot.pdf"))
+# plotErrors(errF, nominalQ=TRUE)
+# dev.off()
 
-pdf(file.path(opt$output_dir, "errR_plot.pdf"))
-plotErrors(errR, nominalQ=TRUE)
-dev.off() 
+# pdf(file.path(opt$output_dir, "errR_plot.pdf"))
+# plotErrors(errR, nominalQ=TRUE)
+# dev.off() 

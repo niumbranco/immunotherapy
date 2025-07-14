@@ -1,4 +1,4 @@
-*.fastq.gz
+
 *.RData
 *.Rhistory
 *.Rapp.history
@@ -6,3 +6,5 @@
 fastp_output/
 fastp_reports/
 Notes/
+dada2_output/
+

@@ -17,3 +17,11 @@ Rscript err.R -i "$results_dir" -o "$results_dir"
 
 # Run denoising step (ASV inference)
 Rscript infer_ASV.R -i "$results_dir" -o "$results_dir"
+
+while [ ! -f "$results_dir/dadaRs.rds" ]; do
+  echo "Waiting for dadaRs.rds to be written..."
+  sleep 2
+done
+
+# Construct the sequence table and remove chimeras 
+Rscript seqtb.R -i "$read_trim_dir" -o "$results_dir"

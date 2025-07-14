@@ -10,7 +10,7 @@ suppressPackageStartupMessages({
 option_list <- list(
   make_option(c("-i", "--input_dir"), type="character", help="Directory containing trimmed FASTQ files"),
   make_option(c("-o", "--output_dir"), type="character", default="dada2_out", help="Output directory [default %default]"),
-  make_option(c("-t", "--threads"), type="integer", default=4, help="Number of threads [default %default]"),
+  make_option(c("-t", "--threads"), type="integer", default=4, help="Number of threads [default %default]")
 )
 
 # Parse args
