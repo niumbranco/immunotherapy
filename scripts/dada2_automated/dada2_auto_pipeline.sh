@@ -25,3 +25,6 @@ done
 
 # Construct the sequence table and remove chimeras 
 Rscript seqtb.R -i "$read_trim_dir" -o "$results_dir"
+
+# Taxonomic assignment with SILVA
+Rscript "${script_dir}/silva.R" -i "$results_dir" -o "$results_dir" -r "$silva_ref"
