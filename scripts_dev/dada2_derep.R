@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 # Load packages
-suppressPackageStartupMessages({
+suppressPackageStartupMessages({voi
   library(optparse)
   library(dada2)
   library(tidyverse)
