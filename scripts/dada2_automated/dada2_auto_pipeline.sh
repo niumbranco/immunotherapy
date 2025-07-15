@@ -5,6 +5,7 @@ root_dir="/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE"
 read_trim_dir="${root_dir}/CODES/fastp_output"
 results_dir="${root_dir}/CODES/dada2_output"
 script_dir="${root_dir}/CODES/scripts/dada2_automated"
+db_dir="${root_dir}/database"
 
 # Create output directory if it doesn't exist
 mkdir -p "$results_dir"
@@ -27,4 +28,9 @@ done
 Rscript seqtb.R -i "$read_trim_dir" -o "$results_dir"
 
 # Taxonomic assignment with SILVA
-Rscript "${script_dir}/silva.R" -i "$results_dir" -o "$results_dir" -r "$silva_ref"
+Rscript "${script_dir}/silva.R" \
+  -i "$results_dir" \
+  -o "$results_dir" \
+  -r "${db_dir}/silva_nr99_v138.1_wSpecies_train_set.fa.gz" \
+  -s "${db_dir}/silva_species_assignment_v138.1.fa.gz"
+
