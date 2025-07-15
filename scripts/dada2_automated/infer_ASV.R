@@ -23,8 +23,8 @@ dir.create(file.path(opt$output_dir, "derep_objects"), showWarnings = FALSE)
 cat("DADA2 version:", as.character(packageVersion("dada2")), "\n")
 
 # Load filtered FASTQ file paths (same logic as in err.R)
-filtFs <- sort(list.files(opt$input_dir, pattern = "_F_filt.fastq.gz$", full.names = TRUE))
-filtRs <- sort(list.files(opt$input_dir, pattern = "_R_filt.fastq.gz$", full.names = TRUE))
+filtFs <- sort(list.files(opt$output_dir, pattern = "_F_filt.fastq.gz$", full.names = TRUE))
+filtRs <- sort(list.files(opt$output_dir, pattern = "_R_filt.fastq.gz$", full.names = TRUE))
 sample.names <- gsub("_F_filt.fastq.gz", "", basename(filtFs))
 
 # Define paths to error models previously learned 
