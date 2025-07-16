@@ -2,6 +2,33 @@
 
 This repository contains all scripts and ressources related to the analysis of the PRJEB61942 dataset, which investigates the link between the microbiome and response to immunotherapy in melanoma patients.
 
+## Requirements: 
+### Conda environments
+Two separate conda environments were used to manage dependencies and ensure reproducibility
+
+#### Environment for fastp:
+Used for quality filtering of FASTQ files
+<pre>
+  conda create -n fastp_env -c bioconda fastp
+  conda activate fastp_env
+</pre>
+
+#### Environment for DADA2 and all R-based scripts: 
+Used for sequence processing and ASV inference in R 
+<pre>
+  conda create -n r_env r-base r-essentals -y
+  conda activate r_env
+</pre>
+And we add the line: 
+<pre>
+  conda install -c bioconda -c conda-forge bioconductor-dada2 
+</pre>
+This line allows to install the DADA2 package and all its dependencies directly into the r_env conda environment, ensuring compatibility with the R version and avoiding potential installation issues when using install.packages() inside R. 
+
+
+
+
+
 
 ## Workflow: 
 
@@ -54,7 +81,8 @@ This setp-by-step approach allowed to verify that each DADA2 step ran correctly 
 #### 6.1 DADA2 analysis - Automated pipeline: 
 
 To streamline the process and make it reusable on other datasets, the DADA2 analysis was restructured into a **modular and automated pipeline** using multiple R scripts, coordinated through a bash script: 
-'scripts/dada2_automated/dada2_auto_pipeline.sh' 
+'scripts/dada2_automated/dada2_auto_pipeline.sh'
+
 
 ## File structure: 
 
