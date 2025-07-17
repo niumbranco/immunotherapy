@@ -1,0 +1,45 @@
+rule trimming_fastp:
+    input:
+        read_1 = lambda wildcards: get_input_files(wildcards)['read_1'],
+        read_2 = lambda wildcards: get_input_files(wildcards)['read_2']
+    output:
+        paired_read_1 = f"{output_dir}/{{sample}}_R1.processed.fastq.gz",
+        paired_read_2 = f"{output_dir}/{{sample}}_R2.processed.fastq.gz",
+        unpaired_read_1 = f"{output_dir}/{{sample}}_R1.unpaired.processed.fastq.gz",
+        unpaired_read_2 = f"{output_dir}/{{sample}}_R2.unpaired.processed.fastq.gz",
+        se_read = f"{output_dir}/{{sample}}_SE.processed.fastq.gz",
+        report_json = f"{output_dir}/{{sample}}_report.json",
+        report_html = f"{output_dir}/{{sample}}_report.html",
+    params:
+        qt = config['fastp']['quality_threshold'],
+        ul = config['fastp']['unqualified_limit'],
+        lt = config['fastp']['length_threshold'],
+        ct = config['fastp']['complexity_threshold'],
+    threads: config['fastp']['threads']
+    conda: f"{env_dir}/fastp_env.yml"
+    benchmark: f"{output_dir}/benchmarks/fastp/{{sample}}_fastp.txt"
+    log: f"{output_dir}/logs/fastp/{{sample}}_fastp.txt"
+    shell:
+        """
+        fastp -w {threads} \
+            -i {input.read_1} -I {input.read_2} \
+            -o {output.paired_read_1} -O {output.paired_read_2} \
+            --unpaired1 {output.unpaired_read_1} \
+            --unpaired2 {output.unpaired_read_2} \
+            --correction \
+            --qualified_quality_phred {params.qt} \
+            --unqualified_percent_limit {params.ul} \
+            --length_required {params.lt} \
+            --complexity_threshold {params.ct} \
+            --json {output.report_json} \
+            --html {output.report_html} \
+            > {log} 2>&1
+
+        # Merge unpaired reads if both exist
+        if [ -s {output.unpaired_read_1} ] && [ -s {output.unpaired_read_2} ]; then
+            zcat {output.unpaired_read_1} {output.unpaired_read_2} | gzip > {output.se_read}
+        else
+            touch {output.se_read}
+        fi
+        """
+
