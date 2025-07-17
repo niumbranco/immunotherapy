@@ -1,0 +1,12 @@
+tmp_dir: "/tmp"
+input_dir: "/project/home/p200762/data_pilot/reads_raw" # dir with raw reads
+output_dir: "/project/home/p200762/data_pilot/reads_processed" # dir with p[rocessed reads
+taxa_dir: "/project/home/p200762/data_pilot/reads_taxonomy" # dir for reads taxonomy assignments
+sample_table: "/project/home/p200762/repos/bioinformatics_pipelines/data_test/samples_reads.tsv"
+
+fastp:
+    threads: 4
+    quality_threshold: 20
+    unqualified_limit: 30
+    length_threshold: 70
+    complexity_threshold: 30
