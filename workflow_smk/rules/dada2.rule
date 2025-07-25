@@ -1,0 +1,70 @@
+rule dada2_filt:
+    input:
+        read_1 = lambda wildcards: f"{output_dir}/{wildcards.sample}_1.clean.fastq.gz",
+        read_2 = lambda wildcards: f"{output_dir}/{wildcards.sample}_2.clean.fastq.gz"
+    output:
+        filt1 = temp(f"{dada2_dir}/{{sample}}_filt1.fastq.gz"),
+        filt2 = temp(f"{dada2_dir}/{{sample}}_filt2.fastq.gz"),
+        summary = temp(f"{dada2_dir}/{{sample}}_filt_summary.txt")
+    params:
+        output_dir = dada2_dir,
+        sample_names = lambda wildcards: wildcards.sample,
+        trunc_len_f = config["dada2"]["trunc_len_f"],
+        trunc_len_r = config["dada2"]["trunc_len_r"]
+    conda:
+        f"{env_dir}/dada2_env.yml"
+    script:
+        "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/scripts/dada2_automated/for_snakemake/filt_smk.R"
+
+rule dada2_err:
+    input:
+        filt_F = expand(f"{dada2_dir}/{{sample}}_filt1.fastq.gz", sample=SAMPLES),
+        filt_R = expand(f"{dada2_dir}/{{sample}}_filt2.fastq.gz", sample=SAMPLES)
+    output:
+        errF = f"{dada2_dir}/errF.rds",
+        errR = f"{dada2_dir}/errR.rds"
+    conda:
+        f"{env_dir}/dada2_env.yml"
+    script:
+        "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/scripts/dada2_automated/for_snakemake/err_smk.R"
+
+rule dada2_infer:
+    input:
+        filtF = f"{dada2_dir}/{{sample}}_filt1.fastq.gz",
+        filtR = f"{dada2_dir}/{{sample}}_filt2.fastq.gz",
+        errF = f"{dada2_dir}/errF.rds",
+        errR = f"{dada2_dir}/errR.rds"
+    output:
+        dadaF = temp(f"{dada2_dir}/{{sample}}_dadaFs.rds"),
+        dadaR = temp(f"{dada2_dir}/{{sample}}_dadaRs.rds"),
+        mergers = temp(f"{dada2_dir}/{{sample}}_mergers.rds")
+    params:
+        sample_name = lambda wildcards: wildcards.sample
+    conda:
+        f"{env_dir}/dada2_env.yml"
+    script:
+         "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/scripts/dada2_automated/for_snakemake/infer_ASV_smk.R"
+
+rule dada2_seqtab:
+    input:
+        dadaFs = expand(f"{dada2_dir}/{{sample}}_dadaFs.rds", sample=SAMPLES),
+        dadaRs = expand(f"{dada2_dir}/{{sample}}_dadaRs.rds", sample=SAMPLES)
+    output:
+        seqtab = f"{dada2_dir}/seqtab.rds"
+    conda:
+        f"{env_dir}/dada2_env.yml"
+    script:
+         "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/scripts/dada2_automated/for_snakemake/seqtb_smk.R"
+
+rule dada2_assign_taxonomy:
+    input:
+        seqtab = f"{dada2_dir}/seqtab.rds"
+    output:
+        taxa = f"{dada2_dir}/taxa.rds"
+    params:
+        silva_train = config["dada2"]["silva_train"],
+        silva_species = config["dada2"]["silva_species"]
+    conda:
+        f"{env_dir}/dada2_env.yml"
+    script:
+        "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/scripts/dada2_automated/for_snakemake/silva_smk.R"

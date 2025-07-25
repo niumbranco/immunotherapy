@@ -1,12 +1,19 @@
-tmp_dir: "/tmp"
-input_dir: "/project/home/p200762/data_pilot/reads_raw" # dir with raw reads
-output_dir: "/project/home/p200762/data_pilot/reads_processed" # dir with p[rocessed reads
-taxa_dir: "/project/home/p200762/data_pilot/reads_taxonomy" # dir for reads taxonomy assignments
-sample_table: "/project/home/p200762/repos/bioinformatics_pipelines/data_test/samples_reads.tsv"
+env_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/workflow_smk/envs"
+input_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/raw_reads"
+output_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/reads_clean"
+taxa_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/reads_taxonomy"
+dada2_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/reads_taxonomy"
+sample_table: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/samples_ID.tsv"
 
 fastp:
-    threads: 4
-    quality_threshold: 20
-    unqualified_limit: 30
-    length_threshold: 70
-    complexity_threshold: 30
+  threads: 4
+  quality_threshold: 20
+  unqualified_limit: 30
+  length_threshold: 100
+  complexity_threshold: 30
+
+dada2:
+  trunc_len_f: 240
+  trunc_len_r: 200
+  silva_train: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/database/silva_nr99_v138.1_wSpecies_train_set.fa.gz" 
+  silva_species: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/database/silva_species_assignment_v138.1.fa.gz"
