@@ -109,6 +109,13 @@ To streamline the process and make it reusable on other datasets, the DADA2 anal
 * log_download.txt     #output log of the download script
 
 ### others
-* fastp_summary_report.pdf #visual explaination of filtering decisions 
+* fastp_summary_report.pdf #visual explaination of filtering decisions
+
+### Run snakemake
+<pre>
+snakemake --cores 4 --use-conda \
+--configfile config/config.yml \
+--snakefile amplicon_workflow.smk
+<pre>
 
 
