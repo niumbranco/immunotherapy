@@ -7,4 +7,4 @@ fastp_output/
 fastp_reports/
 Notes/
 dada2_output/
-
+scripts/dada2_automated/test.sh
