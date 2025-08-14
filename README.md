@@ -124,10 +124,10 @@ NB: The 'PRJEB61942/raw_reads/, reads_clean/, and reads_taxonomy/ folders are ge
 
 ### scripts:
 - **General utilities**
-  - download_fastq.sh → download FATSQ files from ENA
-  - verify_md5.sh → check the md5 integrity of downloaded files
-  - run_fastp.sh → quality filtering with fast
-  - fastp_summary.r → generate plots and summary from fastp JSON reports
+  - `download_fastq.sh` → download FATSQ files from ENA
+  - `verify_md5.sh` → check the md5 integrity of downloaded files
+  - `run_fastp.sh` → quality filtering with fast
+  - `fastp_summary.r` → generate plots and summary from fastp JSON reports
 
 - **DADA 2 (manual)**
   - `dada2.R` → full manual DADA2 pipeline (filtering, denoising, mering, chimera removal, taxonomy assignment)
