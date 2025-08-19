@@ -122,7 +122,7 @@ NB: The 'PRJEB61942/raw_reads/, reads_clean/, and reads_taxonomy/ folders are ge
 
 ## File structure: 
 
-### scripts:
+### scripts/:
 - **General utilities**
   - `download_fastq.sh` → download FATSQ files from ENA
   - `verify_md5.sh` → check the md5 integrity of downloaded files
@@ -133,24 +133,44 @@ NB: The 'PRJEB61942/raw_reads/, reads_clean/, and reads_taxonomy/ folders are ge
   - `dada2.R` → full manual DADA2 pipeline (filtering, denoising, mering, chimera removal, taxonomy assignment)
   
 - **DADA 2 automated pipeline**
+  - `dada2_automated/dada2_auto_pipeline.sh` → main bash script to run the automated pipeline
+  - `dada2_automated/filt.R` →  filtering and trimming
+  - `dada2_automated/err.R`→ learn error rates
+  - `dada2_automated/infer_ASV.R → infer ASVs
+  - `dada2_automated/merge_pairs.R` → merge paired-end reads
+  - `dada2_automated/seqtab.R` → create sequence table
+  - `dada2_automated/taxonomy.R`→ assign taxonomy with SILVA 
 
-  
 - **DADA 2 automated (for Snakemake)**
+  - `dada2_automated/for_snakemake/filt_smk.R` → filtering and trimming
+  - `dada2_automated/for_snakemake/err_smk.R` → learn error rates 
+  - `dada2_automated/for_snakemake/infer_ASV_smk.R` → infer ASVs
+  - `dada2_automated/for_snakemake/merge_pairs_smk.R` → merge paired-end reads
+  - `dada2_automated/for_snakemake/seqtab_smk.R` → create sequence table
+  - `dada2_automated/for_snakemake/taxonomy_smk.R` → assign taxonomy 
+  - `dada2_automated/for_snakemake/diversity_smk.R` → diversity analysis (inside workflow) 
+  - `dada2_automated/for_snakemake/diversity_test_smk.R` → diversity analysis (manual test, outside workflow) 
 
+### workflow_smk/: 
+- `amplicon_workflow_smk` → main Snakemake workflow
+- `config/config_yml` → configuration file for workflow parameters
+- `rules/diversity.rule → diversity analysis rule
+- `rules/dada2.rule → dada2 analysis rule
+- `rules/fastp.rule → fastp analysis rule
 
-### metadata: 
-* filereport_16S.txt → cleaned metadata with 16S samples
-* fastq_links_16S.txt → list of FASTQ URLs to download
-* filereport_16S_filtered.tsv → metadata filtered to keep only good quality samples
-* fastp_summary_table.csv → table with reads and quality scores
+### metadata/: 
+- `filereport_16S.txt` → cleaned metadata with 16S samples
+- `fastq_links_16S.txt` → list of FASTQ URLs to download
+- `filereport_16S_filtered.tsv` → metadata filtered to keep only good quality samples
+- `fastp_summary_table.csv` → table with reads and quality scores
 
-### logs: 
-* md5_check_ok.txt → files that passed the md5 check
-* md5_check_fail.txt → files that failed or were missing
-* log_download.txt → output log of the download script
+### logs/: 
+- `md5_check_ok.txt` → files that passed the md5 check
+- `md5_check_fail.txt` → files that failed or were missing
+- `log_download.txt` → output log of the download script
 
-### others
-* fastp_summary_report.pdf → visual explaination of filtering decisions
+### Notes/:
+- `fastp_summary_report.pdf` → visual explaination of filtering decisions
 
 
 
