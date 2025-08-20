@@ -59,7 +59,7 @@ To make sure files were correctly downloaded:
 - A log of passed and failed checks was created 
   
 ### 4. Quality control with fastp 
-I ran fastp on all paired-end FASTQ files using default settings ('scripts/run_fastp.sh')
+I ran fastp on all paired-end FASTQ files using default settings (`scripts/run_fastp.sh`)
 It cleaned low-quality reads and generated JSON and HTML reports for each sample. 
 
 For fastp, we used the following [this](https://github.com/OpenGene/fastp) tutorial.
@@ -80,7 +80,7 @@ We followed the official [DADA2 tutorial](https://benjjneb.github.io/dada2/tutor
 
 #### 6.1 Manual version: 
 As a first step, DADA2 was run manually to explore and validate each part of the workflow. This was done using a single R script: 
-'scripts/dada2.R'
+`scripts/dada2.R`
 
 The main steps performed were: 
 - **filtering and trimming** with `filterAndTrim()`
@@ -97,7 +97,7 @@ This setp-by-step approach allowed to verify that each DADA2 step ran correctly 
 #### 6.2 Automated pipeline: 
 
 To streamline the process and make it reusable on other datasets, the DADA2 analysis was restructured into a **modular and automated pipeline** using multiple R scripts, coordinated through a bash script: 
-'scripts/dada2_automated/dada2_auto_pipeline.sh'
+`scripts/dada2_automated/dada2_auto_pipeline.sh`
 
 ## Snakemake workflow: 
 
@@ -114,7 +114,7 @@ snakemake --cores 4 --use-conda \
 - **alpha diversity table:** `alpha_div.tsv`
 - **beta diversity matrice:** `bray_matrix.tsv`
 - **combined diversity plots:**
-  - `diversity_combined_plot_all.pdf` → which is created if we run the `diversity_test.R' script manually
+  - `diversity_combined_plot_all.pdf` → which is created if we run the `diversity_test.R` script manually
   - `diversity_combined_plot.png`→ which is created if we run the entire workflow 
 
 
