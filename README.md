@@ -29,7 +29,7 @@ This line allows to install the DADA2 package and all its dependencies directly 
 The `bioconductor-dada2` package contains all functions needed for denoising, merging, chimera removal, and taxonomic assignment in 16S pipelines. 
 
 #### Snakemake environment: 
-Used to run the automated workflow 
+This environment is used to run the automated workflow 
 <pre>
   conda create -n snakemake -c conda-forge -c bioconda snakemake
   conda activate snakemake
@@ -50,7 +50,7 @@ Place both files in a local folder called `database/`.
 From the ENA metadata, I selected only the **16S rRNA** samples based on the `tax_id=9606` and confirmed the sequencing method 
 
 ### 2. Downloading the FASTQ files 
-Using a script (`scripts/downlaod_fastq.sh`), I downloaded all paired-end FASTQ files related to 16S sequencing from the ENA FTP links
+Using a script (`scripts/downlaod_fastq.sh`), I downloaded all paired-end FASTQ files related to 16S sequencing from the ENA FTP links. The dataset is publicly available here: [PRJEB61942 - ENA](https://www.ebi.ac.uk/ena/browser/view/PRJEB61942).
 
 ### 3. Files integrity check 
 To make sure files were correctly downloaded: 
