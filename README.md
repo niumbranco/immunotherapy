@@ -101,7 +101,7 @@ To streamline the process and make it reusable on other datasets, the DADA2 anal
 
 ## Snakemake workflow: 
 
-The automated workflow ('workflow_smk/') reproduced the entire analysis from FASTQ to diversity metrics. 
+The automated workflow (`workflow_smk/`) reproduced the entire analysis from FASTQ to diversity metrics. 
 
 ### Run example
 <pre>
@@ -111,10 +111,10 @@ snakemake --cores 4 --use-conda \
 </pre>
 
 ### Outputs
-- **alpha diversity table:** 'alpha_div.tsv`
+- **alpha diversity table:** `alpha_div.tsv`
 - **beta diversity matrice:** `bray_matrix.tsv`
 - **combined diversity plots:**
-  - `diversity_combined_plot_all.pdf` → which is created if we run the 'diversity_test.R' script manually
+  - `diversity_combined_plot_all.pdf` → which is created if we run the `diversity_test.R' script manually
   - `diversity_combined_plot.png`→ which is created if we run the entire workflow 
 
 
