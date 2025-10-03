@@ -14,6 +14,7 @@ scripts/dada2_automated/test.sh
 *.fastq.gz
 *.fq
 *.fq.gz
+*.fa
 
 # Ignore logs
 logs/
