@@ -1,0 +1,43 @@
+{
+  "name": "fastp",
+  "version": "1.0.1",
+  "build": "h9ea9c2a_0",
+  "build_number": 0,
+  "channel": "https://conda.anaconda.org/bioconda/osx-64",
+  "subdir": "osx-64",
+  "fn": "fastp-1.0.1-h9ea9c2a_0.tar.bz2",
+  "md5": "07eef7a993c096ddffa838cdbf7924b2",
+  "url": "https://conda.anaconda.org/bioconda/osx-64/fastp-1.0.1-h9ea9c2a_0.tar.bz2",
+  "sha256": "354b1d0d28c1fee973ccf461f5cb1e10ea78736a9e0d9f62807332f514272271",
+  "depends": [
+    "isa-l >=2.31.1,<3.0a0",
+    "libcxx >=18",
+    "libdeflate >=1.22,<1.25.0a0"
+  ],
+  "constrains": [],
+  "license": "MIT",
+  "timestamp": 1750160591000,
+  "size": 248764,
+  "requested_spec": "fastp",
+  "package_tarball_full_path": "/usr/local/anaconda3/pkgs/fastp-1.0.1-h9ea9c2a_0.tar.bz2",
+  "extracted_package_dir": "/usr/local/anaconda3/pkgs/fastp-1.0.1-h9ea9c2a_0",
+  "files": [
+    "bin/fastp"
+  ],
+  "paths_data": {
+    "paths_version": 1,
+    "paths": [
+      {
+        "_path": "bin/fastp",
+        "path_type": "hardlink",
+        "sha256": "afef0a4b1c9d16be958d27e661030510b15160a29b4e5d095bba828c12967a2b",
+        "size_in_bytes": 644472,
+        "sha256_in_prefix": "afef0a4b1c9d16be958d27e661030510b15160a29b4e5d095bba828c12967a2b"
+      }
+    ]
+  },
+  "link": {
+    "source": "/usr/local/anaconda3/pkgs/fastp-1.0.1-h9ea9c2a_0",
+    "type": 1
+  }
+}

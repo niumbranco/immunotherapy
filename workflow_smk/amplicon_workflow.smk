@@ -1,11 +1,13 @@
 import os
 import pandas as pd
+import csv
 
-PWD = os.getcwd()
+# Load the YAML into the config dictionary
+configfile: "config/config.yml"
 
-# Definition of environmental variables: paths for the source codes, among others
-CONFIG = os.environ.get("config_file", "../config/config.yml")
-configfile: CONFIG
+# Always relative to where the Snakefile lives
+BASEDIR = workflow.basedir
+ENV_DIR = os.path.join(BASEDIR, config["env_dir"])
 
 # Definition of variables from config
 input_dir = config['input_dir']
@@ -18,18 +20,9 @@ sample_table = pd.read_csv(config["sample_table"], sep="\t", comment="#")
 SAMPLES = sample_table["sample"].tolist()
 
 # Function to generate input file paths based on sample ID
-def get_input_files(wildcards):
-    sample_id = wildcards.sample
-    try:
-        row = sample_table[sample_table["sample"] == sample_id].iloc[0]
-    except IndexError:
-        raise ValueError(f"[ERROR] Sample '{sample_id}' not found in sample_table")
-    try:
-        read_1 = os.path.join(input_dir, row["R1"])
-        read_2 = os.path.join(input_dir, row["R2"])
-    except KeyError as e:
-        raise KeyError(f"[ERROR] Column missing in sample_table: {e}")
-    return {"read_1": read_1, "read_2": read_2}
+def get_input_files(wc):
+    row = sample_table[sample_table["sample"] == wc.sample].iloc[0]
+    return {"read_1": row["R1"], "read_2": row["R2"]}
 
 
 # Generate list of expected outputs
@@ -51,8 +44,8 @@ expected_outputs = (
 
 print(f"fastp conda env: {env_dir}/fastp_env.yml")
 
-workdir:
-    output_dir
+#workdir:
+#    output_dir
 
 include: "rules/fastp.rule"
 include: "rules/dada2.rule"

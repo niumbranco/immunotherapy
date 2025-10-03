@@ -1,9 +1,9 @@
+input_dir: "data/fastq/reads_raw"
+output_dir: "data/fastq/reads_clean"
 env_dir: "envs"
-input_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/raw_reads"
-output_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/reads_clean"
-taxa_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/reads_taxonomy"
-dada2_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/reads_taxonomy"
-sample_table: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/samples_ID.tsv"
+taxa_dir: "reads_taxonomy"
+dada2_dir: "data/reads_taxonomy"
+sample_table: "data/samples_ID.tsv"
 
 fastp:
   threads: 4
@@ -15,5 +15,5 @@ fastp:
 dada2:
   trunc_len_f: 240
   trunc_len_r: 200
-  silva_train: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/database/silva_nr99_v138.1_wSpecies_train_set.fa.gz" 
-  silva_species: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/database/silva_species_assignment_v138.1.fa.gz"
+  silva_train: "database/silva_nr99_v138.1_wSpecies_train_set.fa.gz" 
+  silva_species: "database/silva_species_assignment_v138.1.fa.gz"

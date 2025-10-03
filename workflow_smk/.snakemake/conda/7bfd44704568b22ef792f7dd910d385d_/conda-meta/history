@@ -1,0 +1,8 @@
+==> 2025-10-03 17:55:24 <==
+# cmd: /usr/local/anaconda3/bin/conda env create --quiet --no-default-packages --file /Users/catarina/Desktop/NIUM/immunotherapy/workflow_smk/.snakemake/conda/7bfd44704568b22ef792f7dd910d385d_.yaml --prefix /Users/catarina/Desktop/NIUM/immunotherapy/workflow_smk/.snakemake/conda/7bfd44704568b22ef792f7dd910d385d_
+# conda version: 25.7.0
++bioconda/osx-64::fastp-1.0.1-h9ea9c2a_0
++conda-forge/osx-64::isa-l-2.31.1-h6e16a3a_1
++conda-forge/osx-64::libcxx-21.1.2-h3d58e20_0
++conda-forge/osx-64::libdeflate-1.24-hcc1b750_0
+# update specs: ['fastp']

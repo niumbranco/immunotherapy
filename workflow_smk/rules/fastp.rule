@@ -1,7 +1,7 @@
 rule trimming_fastp:
     input:
-        read_1 = lambda wildcards: get_input_files(wildcards)['read_1'],
-        read_2 = lambda wildcards: get_input_files(wildcards)['read_2']
+        read_1 = lambda wc: get_input_files(wc)["read_1"],
+        read_2 = lambda wc: get_input_files(wc)["read_2"]
     output:
         paired_read_1 = f"{output_dir}/{{sample}}_1.clean.fastq.gz",
         paired_read_2 = f"{output_dir}/{{sample}}_2.clean.fastq.gz",
@@ -13,7 +13,7 @@ rule trimming_fastp:
         lt = config['fastp']['length_threshold'],
         ct = config['fastp']['complexity_threshold'],
     threads: config['fastp']['threads']
-    conda: f"{env_dir}/fastp_env.yml"
+    conda: f"{ENV_DIR}/fastp_env.yml"
     shell:
         """
         fastp -w {threads} \
