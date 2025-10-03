@@ -17,7 +17,7 @@ Used for quality filtering of FASTQ files
 #### DADA2 environment: 
 Used for sequence processing and ASV inference in R 
 <pre>
-  conda create -n r_env r-base r-essentals -y
+  conda create -n r_env r-base r-essentials -y
   conda activate r_env
 </pre>
 And we add the line: 

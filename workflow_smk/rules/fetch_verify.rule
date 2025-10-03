@@ -1,0 +1,31 @@
+rule trimming_fastp:
+    input:
+        read_1 = lambda wildcards: get_input_files(wildcards)['read_1'],
+        read_2 = lambda wildcards: get_input_files(wildcards)['read_2']
+    output:
+        paired_read_1 = f"{output_dir}/{{sample}}_1.clean.fastq.gz",
+        paired_read_2 = f"{output_dir}/{{sample}}_2.clean.fastq.gz",
+        report_json = f"{output_dir}/{{sample}}_report.json",
+        report_html = f"{output_dir}/{{sample}}_report.html",
+    params:
+        qt = config['fastp']['quality_threshold'],
+        ul = config['fastp']['unqualified_limit'],
+        lt = config['fastp']['length_threshold'],
+        ct = config['fastp']['complexity_threshold'],
+    threads: config['fastp']['threads']
+    conda: f"{env_dir}/fastp_env.yml"
+    shell:
+        """
+        fastp -w {threads} \
+            -i {input.read_1} -I {input.read_2} \
+            -o {output.paired_read_1} -O {output.paired_read_2} \
+            --correction \
+            --qualified_quality_phred {params.qt} \
+            --unqualified_percent_limit {params.ul} \
+            --length_required {params.lt} \
+            --complexity_threshold {params.ct} \
+            --json {output.report_json} \
+            --html {output.report_html} 
+
+        """
+

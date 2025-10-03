@@ -1,9 +1,9 @@
-env_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/workflow_smk/envs"
-input_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/raw_reads"
-output_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/reads_clean"
-taxa_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/reads_taxonomy"
-dada2_dir: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/reads_taxonomy"
-sample_table: "/Users/Emma/Documents/EIDD/2A/STAGE_2A/DOCUMENTS_DE_STAGE/immunotherapy/PRJEB61942/samples_ID.tsv"
+env_dir: "envs"
+input_dir: "PRJEB61942/raw_reads"
+output_dir: "PRJEB61942/reads_clean"
+taxa_dir: "PRJEB61942/reads_taxonomy"
+dada2_dir: "PRJEB61942/reads_taxonomy"
+sample_table: "PRJEB61942/samples_ID.tsv"
 
 fastp:
   threads: 4
