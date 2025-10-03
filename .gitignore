@@ -8,3 +8,15 @@ fastp_reports/
 Notes/
 dada2_output/
 scripts/dada2_automated/test.sh
+
+# Ignore raw and processed sequencing data
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+
+# Ignore logs
+logs/
+*.log
+*.err
+*.out
