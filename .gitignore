@@ -8,6 +8,7 @@ fastp_reports/
 Notes/
 dada2_output/
 scripts/dada2_automated/test.sh
+.snakemake/
 
 # Ignore raw and processed sequencing data
 *.fastq
