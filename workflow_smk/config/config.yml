@@ -15,5 +15,6 @@ fastp:
 dada2:
   trunc_len_f: 240
   trunc_len_r: 200
-  silva_train: "database/silva_nr99_v138.1_wSpecies_train_set.fa.gz" 
-  silva_species: "database/silva_species_assignment_v138.1.fa.gz"
+  silva_train: "database/silva_train_test10k.fa" 
+  silva_species: "database/silva_species_test10k.fa"
+    

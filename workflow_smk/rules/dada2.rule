@@ -14,7 +14,7 @@ rule dada2_filt:
     conda:
         f"{ENV_DIR}/dada2_env.yml"
     script:
-        "scripts/dada2_automated/for_snakemake/filt_smk.R"
+        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/filt_smk.R"
 
 rule dada2_err:
     input:
@@ -24,9 +24,9 @@ rule dada2_err:
         errF = f"{dada2_dir}/errF.rds",
         errR = f"{dada2_dir}/errR.rds"
     conda:
-        f"{env_dir}/dada2_env.yml"
+        f"{ENV_DIR}/dada2_env.yml"
     script:
-        "scripts/dada2_automated/for_snakemake/err_smk.R"
+        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/err_smk.R"
 
 rule dada2_infer:
     input:
@@ -41,9 +41,9 @@ rule dada2_infer:
     params:
         sample_name = lambda wildcards: wildcards.sample
     conda:
-        f"{env_dir}/dada2_env.yml"
+        f"{ENV_DIR}/dada2_env.yml"
     script:
-         "scripts/dada2_automated/for_snakemake/infer_ASV_smk.R"
+         f"{BASEDIR}/scripts/dada2_automated/for_snakemake/infer_ASV_smk.R"
 
 rule dada2_seqtab:
     input:
@@ -52,9 +52,9 @@ rule dada2_seqtab:
     output:
         seqtab = f"{dada2_dir}/seqtab.rds"
     conda:
-        f"{env_dir}/dada2_env.yml"
+        f"{ENV_DIR}/dada2_env.yml"
     script:
-         "scripts/dada2_automated/for_snakemake/seqtb_smk.R"
+         f"{BASEDIR}/scripts/dada2_automated/for_snakemake/seqtb_smk.R"
 
 rule dada2_assign_taxonomy:
     input:
@@ -65,6 +65,6 @@ rule dada2_assign_taxonomy:
         silva_train = config["dada2"]["silva_train"],
         silva_species = config["dada2"]["silva_species"]
     conda:
-        f"{env_dir}/dada2_env.yml"
+        f"{ENV_DIR}/dada2_env.yml"
     script:
-        "scripts/dada2_automated/for_snakemake/silva_smk.R"
+        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/silva_smk.R"
