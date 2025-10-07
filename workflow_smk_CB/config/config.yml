@@ -1,0 +1,20 @@
+input_dir: "data/fastq/reads_raw"
+output_dir: "data/fastq/reads_clean"
+env_dir: "envs"
+taxa_dir: "reads_taxonomy"
+dada2_dir: "data/reads_taxonomy"
+sample_table: "data/samples_ID.tsv"
+
+fastp:
+  threads: 4
+  quality_threshold: 20
+  unqualified_limit: 30
+  length_threshold: 100
+  complexity_threshold: 30
+
+dada2:
+  trunc_len_f: 240
+  trunc_len_r: 200
+  silva_train: "database/silva_train_test10k.fa" 
+  silva_species: "database/silva_species_test10k.fa"
+    

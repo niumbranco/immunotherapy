@@ -1,0 +1,27 @@
+########################################
+# MAIN RULE: Diversity analysis module
+########################################
+rule diversity_analysis:
+    input:
+        expand(f"{dada2_dir}/taxonomy_counts_{{rank}}.tsv", rank=["P", "G", "S"])
+    output:
+        expand(f"{dada2_dir}/alpha_diversities_{{rank}}.tsv", rank=["P", "G", "S"])
+    run:
+        print("Diversity analysis module complete.")
+
+
+########################################
+# STEP 1: Prepare tables from DADA2 output
+########################################
+rule prepare_tables:
+    input:
+        seqtab = f"{dada2_dir}/seqtab_nochim.rds",
+        taxa = f"{dada2_dir}/taxa.rds"
+    output:
+        phylum = f"{dada2_dir}/taxonomy_counts_P.tsv",
+        genus = f"{dada2_dir}/taxonomy_counts_G.tsv",
+        species = f"{dada2_dir}/taxonomy_counts_S.tsv"
+    conda:
+        f"{ENV_DIR}/r_env.yml"
+    script:
+        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/prepare_tables_smk.R"
