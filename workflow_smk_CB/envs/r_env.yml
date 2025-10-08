@@ -18,3 +18,4 @@ dependencies:
   - r-purrr
   - r-data.table
   - r-optparse
+  - r-jsonlite

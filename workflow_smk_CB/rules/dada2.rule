@@ -78,3 +78,18 @@ rule dada2_assign_taxonomy:
         f"{ENV_DIR}/dada2_env.yml"
     script:
         f"{BASEDIR}/scripts/dada2_automated/for_snakemake/silva_smk.R"
+
+rule dada2_track_reads:
+    input:
+        fastp_reports = expand(f"{output_dir}/{{sample}}_report.json", sample=SAMPLES),
+        dadaFs = expand(f"{dada2_dir}/{{sample}}_dadaFs.rds", sample=SAMPLES),
+        dadaRs = expand(f"{dada2_dir}/{{sample}}_dadaRs.rds", sample=SAMPLES),
+        mergers = expand(f"{dada2_dir}/{{sample}}_mergers.rds", sample=SAMPLES),
+        seqtab_nochim = f"{dada2_dir}/seqtab_nochim.rds"
+    output:
+        track_table = f"{dada2_dir}/read_tracking.tsv",
+        warnings = f"{dada2_dir}/read_tracking_warnings.txt"
+    conda:
+        f"{ENV_DIR}/dada2_env.yml"
+    script:
+        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/track_reads_smk.R"

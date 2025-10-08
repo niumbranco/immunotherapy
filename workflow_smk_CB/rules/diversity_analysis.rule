@@ -1,18 +1,4 @@
-########################################
-# MAIN RULE: Diversity analysis module
-########################################
-rule diversity_analysis:
-    input:
-        expand(f"{dada2_dir}/taxonomy_counts_{{rank}}.tsv", rank=["P", "G", "S"])
-    output:
-        expand(f"{dada2_dir}/alpha_diversities_{{rank}}.tsv", rank=["P", "G", "S"])
-    run:
-        print("Diversity analysis module complete.")
-
-
-########################################
 # STEP 1: Prepare tables from DADA2 output
-########################################
 rule prepare_tables:
     input:
         seqtab = f"{dada2_dir}/seqtab_nochim.rds",
@@ -25,3 +11,18 @@ rule prepare_tables:
         f"{ENV_DIR}/r_env.yml"
     script:
         f"{BASEDIR}/scripts/dada2_automated/for_snakemake/prepare_tables_smk.R"
+
+# STEP 2: plot diversity per sample at genus and phylo level
+rule plot_taxonomy_composition:
+    input:
+        phylum = f"{dada2_dir}/taxonomy_counts_P.tsv",
+        genus  = f"{dada2_dir}/taxonomy_counts_G.tsv"
+    output:
+        phylum_pdf = f"{dada2_dir}/visuals/microbial_composition_per_sample_P.pdf",
+        genus_pdf  = f"{dada2_dir}/visuals/microbial_composition_per_sample_G.pdf",
+        phylum_overview = f"{dada2_dir}/visuals/microbial_composition_overview_P.pdf",
+        genus_overview  = f"{dada2_dir}/visuals/microbial_composition_overview_G.pdf"
+    conda:
+        f"{ENV_DIR}/r_env.yml"
+    script:
+        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/plot_taxonomy_composition_smk.R"

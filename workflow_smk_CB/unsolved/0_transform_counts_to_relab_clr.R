@@ -12,9 +12,8 @@ ranks <- c("P", "G", "S")
 
 # prefiltering of data
 remove_counts_of <- c("Chordata", "Homo", "Homo sapiens")
+
 # remove also very low counts (less than 10 counts)
-
-
 for (i in 1:length(ranks)){
   
   rank_i <- ranks[i]

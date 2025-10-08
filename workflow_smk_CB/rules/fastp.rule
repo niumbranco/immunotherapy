@@ -29,3 +29,15 @@ rule trimming_fastp:
 
         """
 
+rule fastp_summary:
+    input:
+        expand("data/fastq/reads_clean/{sample}_report.json", sample=SAMPLES)
+    output:
+        "data/fastq/reads_clean/fastp_summary_table.csv",
+        "data/fastq/reads_clean/fastp_summary_plots.pdf"
+    conda:
+        f"{ENV_DIR}/r_env.yml"
+    script:
+        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/fastp_summary_smk.R"
+
+

@@ -15,6 +15,9 @@ seqtab <- readRDS(seqtab_file)
 # Remove chimeras using consensus method (recommended by DADA2 authors)
 seqtab_nochim <- removeBimeraDenovo(seqtab, method = "consensus", multithread = TRUE, verbose = TRUE)
 
+# Preserve rownames
+rownames(seqtab_nochim) <- rownames(seqtab)
+
 # Save the chimera-free table
 saveRDS(seqtab_nochim, out_file)
 
