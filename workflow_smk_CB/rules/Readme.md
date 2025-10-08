@@ -1,23 +1,42 @@
-🧬 16S Amplicon Sequencing Workflow (DADA2 + Snakemake)
+# 🧬 16S Amplicon Sequencing Workflow (DADA2 + Snakemake)
 
-This repository contains a **Snakemake-based 16S rRNA amplicon analysis pipeline**, designed for reproducible and automated microbiome workflows.  
-It performs read quality control with **fastp**, denoising with **DADA2**, taxonomic assignment using the **SILVA database [1]**, and produces diversity visualizations.
-
-[![Snakemake](https://img.shields.io/badge/snakemake-≥7.0-brightgreen.svg)](https://snakemake.github.io)
-[![DADA2](https://img.shields.io/badge/DADA2-%20v1.28%20|%20R%20package-blue.svg)](https://benjjneb.github.io/dada2/index.html)
----
-
-## ⚙️ Pipeline Overview
-
-| Step | Description | Tool |
-|------|--------------|------|
-| 1 | Quality control and read trimming | `fastp` |
-| 2 | Denoising, merging, chimera removal and taxonomic assignment | `DADA2` |
-| 3 | Diversity and community composition plots | `R` |
+[![Snakemake](https://img.shields.io/badge/Snakemake-≥7.0-brightgreen.svg)](https://snakemake.github.io)
+[![DADA2](https://img.shields.io/badge/DADA2-High%20Resolution%20Denoising-blue.svg)](https://benjjneb.github.io/dada2/index.html)
 
 ---
 
-## 📁 Repository Structure
+## Overview
+
+This repository contains a workflow implemented in **Snakemake** to run **16S rRNA amplicon analyses**.  
+It is designed for reproducible and automated microbiome workflows.
+
+The pipeline performs:
+
+- Read quality control with **fastp**
+- Amplicon sequence variant (ASV) inference and taxonomic assignment with **DADA2**, using the **SILVA database [1]**
+- Diversity and community composition visualizations
+
+---
+
+## Requirements
+
+Before running the workflow, ensure that you have:
+
+1. Raw 16S paired-end FASTQ files.
+2. A table listing sample IDs and file names.
+3. Snakemake installed and available in your system PATH.
+
+Snakemake is the workflow manager that executes the pipeline and automatically creates all rule-specific environments (for `fastp`, `DADA2`, and R). It must be installed once before running the workflow. The recommended method is to create a dedicated Conda environment for it:
+
+```bash
+conda create -n snakemake -c conda-forge -c bioconda snakemake mamba -y
+conda activate snakemake
+snakemake --version
+```
+This ensures that Snakemake and its dependencies are correctly configured on your system.
+You should see a version number (e.g., 7.32.4) when running the last command, confirming that the installation was successful.
+
+## Repository Structure
 ```
 16S_pipeline/
 ├── Snakefile                 # main Snakemake workflow
@@ -59,44 +78,43 @@ It performs read quality control with **fastp**, denoising with **DADA2**, taxon
 ```
 ---
 
-## 🧩 Installation
+### Conda environments
+All environments to run the snakemake workflow can be built automatically using the provided `.yml` files within envs folder, or manually as described below.
 
-### 1️⃣ Clone the repository
+#### 1. fastp environment
+
+Used for quality filtering and integrity checks of FASTQ files.
+
 ```bash
-git clone https://github.com/<yourusername>/16S_pipeline.git
-cd 16S_pipeline
-2️⃣ Create Conda environments
-conda env create -f envs/fastp_env.yml
-conda env create -f envs/dada2_env.yml
-conda env create -f envs/r_env.yml
-3️⃣ Set up database
-Place the SILVA reference files in the database/ folder:
-silva_nr99_v138.1_wSpecies_train_set.fa
-silva_species_assignment_v138.1.fa
-4️⃣ Configure the workflow
-Edit config.yml to specify your paths and parameters.
-Example:
-fastp:
-  quality_threshold: 20
-  length_threshold: 100
-  threads: 4
+conda create -n fastp_env -c bioconda fastp -y
+conda activate fastp_env
+fastp --version
+```
 
-dada2:
-  trunc_len_f: 250
-  trunc_len_r: 200
-  threads: 4
+#### 2. DADA2 environment
 
-paths:
-  raw_dir: "data/fastq/raw"
-  output_dir: "results"
-🚀 Running the Workflow
-Run the full pipeline
-snakemake --cores 4 --use-conda
-Run only the plotting step
-snakemake --cores 2 --use-conda results/visuals/microbial_composition_overview_G.pdf
-All results will be saved in the results/ directory.
+Used for sequence processing, ASV inference, and taxonomy assignment in R.
+```bash
+conda create -n r_env -c conda-forge r-base r-essentials -y
+conda activate r_env
+conda install -c bioconda -c conda-forge bioconductor-dada2 -y
+```
+This installs DADA2 and all dependencies directly into the R environment, ensuring compatibility with the R version and avoiding issues with install.packages() inside R.
+To verify installation:
+```bash
+library(dada2)
+packageVersion("dada2")
+```
 
-📊 Outputs
+#### 3. Snakemake environment
+Used to execute and manage the automated workflow.
+```bash
+conda create -n snakemake -c conda-forge -c bioconda snakemake -y
+conda activate snakemake
+snakemake --version
+```
+
+### Results 
 File	Description
 taxonomy_counts_P.tsv	ASV counts per sample (Phylum level)
 taxonomy_counts_G.tsv	ASV counts per sample (Genus level)
@@ -109,15 +127,7 @@ Each R script is executed through Snakemake, ensuring reproducible environments 
 FASTQ files, intermediate .rds, and .snakemake/ folders should be excluded from git using .gitignore.
 You can customize the plotting script to add sample grouping, metadata coloring, or horizontal bars.
 
-👩‍🔬 Citation
-Callahan BJ et al. (2016). DADA2: High-resolution sample inference from Illumina amplicon data. Nature Methods 13(7):581–583.
+👩‍🔬 Citations
 [1] McLaren, M. R., & Callahan, B. J. (2021). Silva 138.1 prokaryotic SSU taxonomic training data formatted for DADA2 [Data set]. Zenodo. https://doi.org/10.5281/zenodo.4587955
-Köster J & Rahmann S (2012). Snakemake—a scalable bioinformatics workflow engine. Bioinformatics 28(19):2520–2522.
 
 
-📄 License
-This workflow is distributed under the MIT License.
-You are free to reuse, modify, and redistribute it.
-✨ Acknowledgements
-Developed by Catarina Banco
-Designed for automated 16S microbiome analyses at NIUM / Friesland Campina.
