@@ -1,7 +1,7 @@
 rule dada2_filt:
     input:
-        read_1 = lambda wildcards: f"{output_dir}/{wildcards.sample}_1.clean.fastq.gz",
-        read_2 = lambda wildcards: f"{output_dir}/{wildcards.sample}_2.clean.fastq.gz"
+        read_1 = lambda wildcards: f"{fastp_dir}/{wildcards.sample}_1.clean.fastq.gz",
+        read_2 = lambda wildcards: f"{fastp_dir}/{wildcards.sample}_2.clean.fastq.gz"
     output:
         filt1 = temp(f"{dada2_dir}/{{sample}}_filt1.fastq.gz"),
         filt2 = temp(f"{dada2_dir}/{{sample}}_filt2.fastq.gz"),
@@ -14,7 +14,7 @@ rule dada2_filt:
     conda:
         f"{ENV_DIR}/dada2_env.yml"
     script:
-        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/filt_smk.R"
+        f"{BASEDIR}/scripts/for_snakemake/filt_smk.R"
 
 rule dada2_err:
     input:
@@ -26,7 +26,7 @@ rule dada2_err:
     conda:
         f"{ENV_DIR}/dada2_env.yml"
     script:
-        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/err_smk.R"
+        f"{BASEDIR}/scripts/for_snakemake/err_smk.R"
 
 rule dada2_infer:
     input:
@@ -43,7 +43,7 @@ rule dada2_infer:
     conda:
         f"{ENV_DIR}/dada2_env.yml"
     script:
-         f"{BASEDIR}/scripts/dada2_automated/for_snakemake/infer_ASV_smk.R"
+         f"{BASEDIR}/scripts/for_snakemake/infer_ASV_smk.R"
 
 rule dada2_seqtab:
     input:
@@ -54,7 +54,7 @@ rule dada2_seqtab:
     conda:
         f"{ENV_DIR}/dada2_env.yml"
     script:
-         f"{BASEDIR}/scripts/dada2_automated/for_snakemake/seqtb_smk.R"
+         f"{BASEDIR}/scripts/for_snakemake/seqtb_smk.R"
 
 rule dada2_remove_chimeras:
     input:
@@ -64,7 +64,7 @@ rule dada2_remove_chimeras:
     conda:
         f"{ENV_DIR}/dada2_env.yml"
     script:
-        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/remove_chimeras_smk.R"
+        f"{BASEDIR}/scripts/for_snakemake/remove_chimeras_smk.R"
 
 rule dada2_assign_taxonomy:
     input:
@@ -77,19 +77,4 @@ rule dada2_assign_taxonomy:
     conda:
         f"{ENV_DIR}/dada2_env.yml"
     script:
-        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/silva_smk.R"
-
-rule dada2_track_reads:
-    input:
-        fastp_reports = expand(f"{output_dir}/{{sample}}_report.json", sample=SAMPLES),
-        dadaFs = expand(f"{dada2_dir}/{{sample}}_dadaFs.rds", sample=SAMPLES),
-        dadaRs = expand(f"{dada2_dir}/{{sample}}_dadaRs.rds", sample=SAMPLES),
-        mergers = expand(f"{dada2_dir}/{{sample}}_mergers.rds", sample=SAMPLES),
-        seqtab_nochim = f"{dada2_dir}/seqtab_nochim.rds"
-    output:
-        track_table = f"{dada2_dir}/read_tracking.tsv",
-        warnings = f"{dada2_dir}/read_tracking_warnings.txt"
-    conda:
-        f"{ENV_DIR}/dada2_env.yml"
-    script:
-        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/track_reads_smk.R"
+        f"{BASEDIR}/scripts/for_snakemake/silva_smk.R"

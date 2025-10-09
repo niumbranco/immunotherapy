@@ -4,25 +4,26 @@ rule prepare_tables:
         seqtab = f"{dada2_dir}/seqtab_nochim.rds",
         taxa = f"{dada2_dir}/taxa.rds"
     output:
-        phylum = f"{dada2_dir}/taxonomy_counts_P.tsv",
-        genus = f"{dada2_dir}/taxonomy_counts_G.tsv",
-        species = f"{dada2_dir}/taxonomy_counts_S.tsv"
+        phylum = f"{results}/taxonomy_counts_P.tsv",
+        genus = f"{results}/taxonomy_counts_G.tsv",
     conda:
         f"{ENV_DIR}/r_env.yml"
     script:
-        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/prepare_tables_smk.R"
+        f"{BASEDIR}/scripts/for_snakemake/prepare_tables_smk.R"
 
 # STEP 2: plot diversity per sample at genus and phylo level
 rule plot_taxonomy_composition:
     input:
-        phylum = f"{dada2_dir}/taxonomy_counts_P.tsv",
-        genus  = f"{dada2_dir}/taxonomy_counts_G.tsv"
+        phylum = f"{results}/Relabs_P.tsv",
+        genus = f"{results}/Relabs_G.tsv",
+        phylum_counts = f"{results}/taxonomy_counts_P.tsv",
+        genus_counts = f"{results}/taxonomy_counts_G.tsv"
     output:
-        phylum_pdf = f"{dada2_dir}/visuals/microbial_composition_per_sample_P.pdf",
-        genus_pdf  = f"{dada2_dir}/visuals/microbial_composition_per_sample_G.pdf",
-        phylum_overview = f"{dada2_dir}/visuals/microbial_composition_overview_P.pdf",
-        genus_overview  = f"{dada2_dir}/visuals/microbial_composition_overview_G.pdf"
+        phylum_pdf = f"{results}/visuals/microbial_composition_per_sample_P.pdf",
+        genus_pdf = f"{results}/visuals/microbial_composition_per_sample_G.pdf",
+        phylum_overview = f"{results}/visuals/microbial_composition_overview_P.pdf",
+        genus_overview = f"{results}/visuals/microbial_composition_overview_G.pdf"
     conda:
         f"{ENV_DIR}/r_env.yml"
     script:
-        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/plot_taxonomy_composition_smk.R"
+        f"{BASEDIR}/scripts/for_snakemake/plot_taxonomy_composition_smk.R"

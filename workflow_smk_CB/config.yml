@@ -1,0 +1,22 @@
+input_dir: "data/fastp/reads_raw"
+fastp_dir: "data/fastp/reads_clean"
+env_dir: "envs"
+dada2_dir: "data/dada2"
+dada2_taxonomy: "data/dada2/reads_taxonomy"
+sample_table: "data/samples_ID.tsv"
+results: "results"
+
+fastp:
+  threads: 4
+  quality_threshold: 20
+  unqualified_limit: 30
+  length_threshold: 100
+  complexity_threshold: 30
+
+dada2:
+  trunc_len_f: 240
+  trunc_len_r: 200
+  silva_train: "database/silva_train_test10k.fa" # UPDATE WITH THE CORRECT FILES USED FOR THE TAXONOMY ASSIGNMENT!
+  silva_species: "database/silva_species_test10k.fa" # UPDATE WITH THE CORRECT FILES USED FOR THE TAXONOMY ASSIGNMENT!
+    
+    

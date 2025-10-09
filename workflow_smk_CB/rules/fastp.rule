@@ -3,10 +3,10 @@ rule trimming_fastp:
         read_1 = lambda wc: get_input_files(wc)["read_1"],
         read_2 = lambda wc: get_input_files(wc)["read_2"]
     output:
-        paired_read_1 = f"{output_dir}/{{sample}}_1.clean.fastq.gz",
-        paired_read_2 = f"{output_dir}/{{sample}}_2.clean.fastq.gz",
-        report_json = f"{output_dir}/{{sample}}_report.json",
-        report_html = f"{output_dir}/{{sample}}_report.html",
+        paired_read_1 = f"{fastp_dir}/{{sample}}_1.clean.fastq.gz",
+        paired_read_2 = f"{fastp_dir}/{{sample}}_2.clean.fastq.gz",
+        report_json = f"{fastp_dir}/{{sample}}_report.json",
+        report_html = f"{fastp_dir}/{{sample}}_report.html",
     params:
         qt = config['fastp']['quality_threshold'],
         ul = config['fastp']['unqualified_limit'],
@@ -38,6 +38,6 @@ rule fastp_summary:
     conda:
         f"{ENV_DIR}/r_env.yml"
     script:
-        f"{BASEDIR}/scripts/dada2_automated/for_snakemake/fastp_summary_smk.R"
+        f"{BASEDIR}/scripts/for_snakemake/fastp_summary_smk.R"
 
 
