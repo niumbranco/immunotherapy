@@ -2,7 +2,7 @@
 
 ## 1. Fetch data
 # Create directory for output
-OUTDIR="../../data/fastp"
+OUTDIR="../../data/fastp/reads_raw"
 LOGFILE="$OUTDIR/download_$(date +%Y%m%d_%H%M%S).log"
 mkdir -p "$OUTDIR"
 
@@ -19,16 +19,16 @@ while IFS= read -r url; do
         echo "FAILED: $(basename "$url")" | tee -a "$LOGFILE"
     fi
     echo "---------------------------------" >> "$LOGFILE"
-done < ../data/fastq_links_16S.txt
+done < ../../data/fastq_links_16S.txt
 
 echo "Download finished at $(date)" >> "$LOGFILE"
 
 ## 2. Check integrity
 # Input metadata file
-TSV="../data/filereport_16S.tsv" # this file came, in this case, from the metadata associated with the project
+TSV="../../data/filereport_16S.tsv" # this file came, in this case, from the metadata associated with the project
 
 # The right location of the fastq files
-FASTQ_DIR="../data/fastp"
+FASTQ_DIR="../../data/fastp/reads_raw"
 
 # Output log files
 LOG_OK="md5_check_ok.txt"
